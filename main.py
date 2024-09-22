@@ -21,9 +21,13 @@ if st.button("Scrape Site"):
         parse_description = st.text_area("Describe what you want to parse")
 
         if st.button("Parse Content"):
+            st.write("Parse button clicked")
             if parse_description:
+                print(f"Parse description provided: {parse_description}")
                 st.write("Parsing the content")
 
-                dom_chuncks = split_dom_content(st.session_state.dom_contnent)
+                dom_chuncks = split_dom_content(st.session_state.dom_content)
+                print("dom chunked...")
                 result = parse_with_ollama(dom_chuncks, parse_description)
+                print("llm callled...")
                 st.write(result)

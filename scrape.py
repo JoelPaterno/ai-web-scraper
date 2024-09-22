@@ -14,11 +14,9 @@ def scrape_website(website):
         driver.get(website)
         print("page loaded...")
         html = driver.page_source
-        #time.sleep(3)
-
         return html
     finally:
-        print("closing browser")
+        print("closing browser...")
         driver.quit()
 
 def extract_body_content(html_content):
