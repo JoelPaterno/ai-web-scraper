@@ -17,17 +17,16 @@ if st.button("Scrape Site"):
     with st.expander("View DOM content"):
         st.text_area("DOM Content", cleaned_content, height=300)
 
-    if "dom_content" in st.session_state:
-        parse_description = st.text_area("Describe what you want to parse")
+if "dom_content" in st.session_state:
+    parse_description = st.text_area("Describe what you want to parse")
 
-        if st.button("Parse Content"):
-            st.write("Parse button clicked")
-            if parse_description:
-                print(f"Parse description provided: {parse_description}")
-                st.write("Parsing the content")
+    if st.button("Parse Content"):
+        if parse_description:
+            st.write("Parsing the content...")
 
-                dom_chuncks = split_dom_content(st.session_state.dom_content)
-                print("dom chunked...")
-                result = parse_with_ollama(dom_chuncks, parse_description)
-                print("llm callled...")
-                st.write(result)
+            # Parse the content with Ollama
+            dom_chunks = split_dom_content(st.session_state.dom_content)
+            print(f"dom chunked in to {len(dom_chunks)} chunks")
+            parsed_result = parse_with_ollama(dom_chunks, parse_description)
+            print("Passed to parser ...")
+            st.write(parsed_result)
